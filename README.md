@@ -1,5 +1,5 @@
 
-# Fleex Module Repository
+# Fleex modules Repository
 
 This repository contains a collection of YAML files that define modules for the Fleex tool. These modules can be utilized by the `scan` function in Fleex using the following syntax: 
 

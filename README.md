@@ -54,11 +54,11 @@ fleex scan --module testmodule.yaml
 
 This repository is a first version and may be expanded in the future to support multiple commands per module.
 
-# Contributing:
+## Contributing:
 
 If you would like to contribute to this repository, feel free to fork and create a pull request with your changes. Make sure to follow the same format as existing modules.
 
 **Note**: This is an initial version of the repository and may be subject to future updates and improvements.
 
-# License
+## License
 Fleex modules is distributed under Apache-2.0 License

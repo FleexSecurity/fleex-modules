@@ -1,0 +1,21 @@
+name: medusa
+description: Speedy, parallel, and modular login brute-forcer
+author: fleex
+
+vars:
+  MODULE: "ssh"
+  USER: "root"
+  PASSLIST: "/usr/share/wordlists/rockyou.txt"
+
+files:
+  - source: "{vars.PASSLIST}"
+    destination: /tmp/passlist.txt
+
+steps:
+  - name: medusa
+    command: "medusa -H {INPUT} -u {vars.USER} -P /tmp/passlist.txt -M {vars.MODULE} -O {OUTPUT}"
+    timeout: "4h"
+
+output:
+  aggregate: concat
+  deduplicate: false

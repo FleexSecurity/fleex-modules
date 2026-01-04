@@ -1,0 +1,11 @@
+name: kxss
+description: Check which parameters are reflected in response
+author: fleex
+
+steps:
+  - name: kxss
+    command: "cat {INPUT} | kxss > {OUTPUT}"
+
+output:
+  aggregate: concat
+  deduplicate: true

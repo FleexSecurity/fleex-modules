@@ -1,0 +1,14 @@
+name: qsreplace
+description: Replace query string values in URLs
+author: fleex
+
+vars:
+  VALUE: "FUZZ"
+
+steps:
+  - name: qsreplace
+    command: "cat {INPUT} | qsreplace {vars.VALUE} > {OUTPUT}"
+
+output:
+  aggregate: concat
+  deduplicate: true

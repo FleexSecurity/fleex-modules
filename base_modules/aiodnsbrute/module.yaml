@@ -1,0 +1,19 @@
+name: aiodnsbrute
+description: Async DNS brute-force subdomain enumeration
+author: fleex
+
+vars:
+  WORDLIST: "/usr/share/wordlists/dns.txt"
+
+files:
+  - source: "{vars.WORDLIST}"
+    destination: /tmp/wordlist.txt
+
+steps:
+  - name: aiodnsbrute
+    command: "cat {INPUT} | while read domain; do aiodnsbrute -w /tmp/wordlist.txt \"$domain\"; done > {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: true

@@ -1,0 +1,11 @@
+name: httpx
+description: Fast and multi-purpose HTTP toolkit
+author: fleex
+
+steps:
+  - name: httpx
+    command: "httpx -l {INPUT} -o {OUTPUT} -silent"
+
+output:
+  aggregate: concat
+  deduplicate: true

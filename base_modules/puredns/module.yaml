@@ -1,0 +1,19 @@
+name: puredns
+description: Fast domain resolver and subdomain bruteforcer
+author: fleex
+
+vars:
+  RESOLVERS: "/root/resolvers.txt"
+
+files:
+  - source: "{vars.RESOLVERS}"
+    destination: /tmp/resolvers.txt
+
+steps:
+  - name: puredns
+    command: "puredns resolve {INPUT} -r /tmp/resolvers.txt -w {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: true

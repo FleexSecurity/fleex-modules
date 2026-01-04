@@ -1,0 +1,18 @@
+name: six2dez-dns-permutations
+description: DNS permutation wordlist by six2dez
+author: fleex
+
+vars:
+  WORDLIST: "/root/permutations.txt"
+
+files:
+  - source: "{vars.WORDLIST}"
+    destination: /tmp/permutations.txt
+
+steps:
+  - name: permutations
+    command: "cat {INPUT} | while read domain; do sed \"s/$/.$domain/\" /tmp/permutations.txt; done > {OUTPUT}"
+
+output:
+  aggregate: concat
+  deduplicate: true

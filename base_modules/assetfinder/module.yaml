@@ -1,0 +1,11 @@
+name: assetfinder
+description: Find domains and subdomains related to a given domain
+author: fleex
+
+steps:
+  - name: assetfinder
+    command: "cat {INPUT} | assetfinder --subs-only > {OUTPUT}"
+
+output:
+  aggregate: concat
+  deduplicate: true

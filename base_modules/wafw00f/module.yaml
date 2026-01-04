@@ -1,0 +1,11 @@
+name: wafw00f
+description: Web Application Firewall detection tool
+author: fleex
+
+steps:
+  - name: wafw00f
+    command: "cat {INPUT} | while read url; do wafw00f \"$url\"; done > {OUTPUT}"
+
+output:
+  aggregate: concat
+  deduplicate: false

@@ -1,0 +1,11 @@
+name: subjs
+description: Fetcher for JavaScript files from list of URLs
+author: fleex
+
+steps:
+  - name: subjs
+    command: "cat {INPUT} | subjs > {OUTPUT}"
+
+output:
+  aggregate: concat
+  deduplicate: true

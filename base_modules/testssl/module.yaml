@@ -1,0 +1,12 @@
+name: testssl
+description: Testing TLS/SSL encryption anywhere
+author: fleex
+
+steps:
+  - name: testssl
+    command: "cat {INPUT} | while read host; do testssl.sh --quiet --jsonfile /tmp/testssl_$(echo \"$host\" | md5sum | cut -d' ' -f1).json \"$host\" 2>/dev/null; done && cat /tmp/testssl_*.json > {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: false

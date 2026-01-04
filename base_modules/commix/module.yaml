@@ -1,0 +1,12 @@
+name: commix
+description: Automated command injection exploitation tool
+author: fleex
+
+steps:
+  - name: commix
+    command: "cat {INPUT} | while read url; do commix -u \"$url\" --batch --output-dir=/tmp/commix_out 2>/dev/null; done && find /tmp/commix_out -type f -exec cat {} \\; > {OUTPUT}"
+    timeout: "4h"
+
+output:
+  aggregate: concat
+  deduplicate: false

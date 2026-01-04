@@ -1,0 +1,12 @@
+name: dnsrecon
+description: DNS enumeration and reconnaissance tool
+author: fleex
+
+steps:
+  - name: dnsrecon
+    command: "cat {INPUT} | while read domain; do dnsrecon -d \"$domain\" -j /tmp/dnsrecon_\"$domain\".json 2>/dev/null; done && cat /tmp/dnsrecon_*.json > {OUTPUT}"
+    timeout: "1h"
+
+output:
+  aggregate: concat
+  deduplicate: false

@@ -1,0 +1,16 @@
+name: gospider
+description: Fast web spider written in Go
+author: fleex
+
+vars:
+  DEPTH: "3"
+  CONCURRENCY: "10"
+
+steps:
+  - name: gospider
+    command: "gospider -S {INPUT} -o /tmp/gospider_out -c {vars.CONCURRENCY} -d {vars.DEPTH} && cat /tmp/gospider_out/* > {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: true

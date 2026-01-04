@@ -1,0 +1,19 @@
+name: kiterunner
+description: API endpoint discovery tool
+author: fleex
+
+vars:
+  WORDLIST: "/root/routes-large.kite"
+
+files:
+  - source: "{vars.WORDLIST}"
+    destination: /tmp/routes.kite
+
+steps:
+  - name: kiterunner
+    command: "kr scan {INPUT} -w /tmp/routes.kite -o json > {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: false

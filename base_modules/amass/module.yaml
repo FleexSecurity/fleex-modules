@@ -1,0 +1,12 @@
+name: amass
+description: In-depth attack surface mapping and asset discovery
+author: fleex
+
+steps:
+  - name: amass-passive
+    command: "amass enum -passive -df {INPUT} -o {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: true

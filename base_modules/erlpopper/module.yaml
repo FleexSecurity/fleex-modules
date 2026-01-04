@@ -1,0 +1,12 @@
+name: erlpopper
+description: Erlang Port Mapper Daemon scanner
+author: fleex
+
+steps:
+  - name: erlpopper
+    command: "cat {INPUT} | while read ip; do python3 /root/tools/ERLPopper/erlpopper.py \"$ip\" 2>/dev/null; done > {OUTPUT}"
+    timeout: "1h"
+
+output:
+  aggregate: concat
+  deduplicate: true

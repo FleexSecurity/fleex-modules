@@ -1,0 +1,12 @@
+name: dalfox
+description: Parameter analysis and XSS scanner
+author: fleex
+
+steps:
+  - name: dalfox
+    command: "dalfox file {INPUT} -o {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: true

@@ -1,0 +1,12 @@
+name: dirdar
+description: DirDar is a tool that searches for files and directories
+author: fleex
+
+steps:
+  - name: dirdar
+    command: "dirdar -l {INPUT} -o {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: true

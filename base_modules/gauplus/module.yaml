@@ -1,0 +1,12 @@
+name: gauplus
+description: Enhanced version of gau with additional features
+author: fleex
+
+steps:
+  - name: gauplus
+    command: "cat {INPUT} | gauplus --subs > {OUTPUT}"
+    timeout: "1h"
+
+output:
+  aggregate: concat
+  deduplicate: true

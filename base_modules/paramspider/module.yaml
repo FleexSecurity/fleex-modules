@@ -1,0 +1,12 @@
+name: paramspider
+description: Mining parameters from dark corners of Web Archives
+author: fleex
+
+steps:
+  - name: paramspider
+    command: "cat {INPUT} | while read domain; do python3 -m paramspider -d \"$domain\" --output /tmp/params_\"$domain\".txt 2>/dev/null; done && cat /tmp/params_*.txt > {OUTPUT}"
+    timeout: "1h"
+
+output:
+  aggregate: concat
+  deduplicate: true

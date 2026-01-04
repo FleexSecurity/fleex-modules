@@ -1,0 +1,11 @@
+name: findomain
+description: Fast subdomain enumeration tool
+author: fleex
+
+steps:
+  - name: findomain
+    command: "findomain -f {INPUT} -u {OUTPUT}"
+
+output:
+  aggregate: concat
+  deduplicate: true

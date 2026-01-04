@@ -1,0 +1,11 @@
+name: ipcdn
+description: Check if IPs belong to CDN providers
+author: fleex
+
+steps:
+  - name: ipcdn
+    command: "cat {INPUT} | ipcdn > {OUTPUT}"
+
+output:
+  aggregate: concat
+  deduplicate: true

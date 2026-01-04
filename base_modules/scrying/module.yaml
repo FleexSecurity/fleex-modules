@@ -1,0 +1,12 @@
+name: scrying
+description: Web screenshot tool
+author: fleex
+
+steps:
+  - name: scrying
+    command: "scrying --file {INPUT} --output /tmp/scrying_out && ls /tmp/scrying_out > {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: false

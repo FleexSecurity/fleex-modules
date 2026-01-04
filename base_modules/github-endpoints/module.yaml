@@ -1,0 +1,15 @@
+name: github-endpoints
+description: Find endpoints from GitHub source code
+author: fleex
+
+vars:
+  GITHUB_TOKEN: ""
+
+steps:
+  - name: github-endpoints
+    command: "cat {INPUT} | while read domain; do github-endpoints -d \"$domain\" -t {vars.GITHUB_TOKEN}; done > {OUTPUT}"
+    timeout: "1h"
+
+output:
+  aggregate: concat
+  deduplicate: true

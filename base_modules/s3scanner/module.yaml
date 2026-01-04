@@ -1,0 +1,12 @@
+name: s3scanner
+description: Scan for open AWS S3 buckets
+author: fleex
+
+steps:
+  - name: s3scanner
+    command: "s3scanner scan --buckets-file {INPUT} > {OUTPUT}"
+    timeout: "1h"
+
+output:
+  aggregate: concat
+  deduplicate: true

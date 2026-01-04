@@ -1,0 +1,11 @@
+name: crlfuzz
+description: CRLF vulnerability scanner
+author: fleex
+
+steps:
+  - name: crlfuzz
+    command: "crlfuzz -l {INPUT} -o {OUTPUT} -s"
+
+output:
+  aggregate: concat
+  deduplicate: true

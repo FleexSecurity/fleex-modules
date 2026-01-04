@@ -1,0 +1,12 @@
+name: hakrevdns
+description: Reverse DNS lookup at scale
+author: fleex
+
+steps:
+  - name: hakrevdns
+    command: "cat {INPUT} | hakrevdns > {OUTPUT}"
+    timeout: "1h"
+
+output:
+  aggregate: concat
+  deduplicate: true

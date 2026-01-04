@@ -1,0 +1,12 @@
+name: jaeles
+description: Web application security scanner
+author: fleex
+
+steps:
+  - name: jaeles
+    command: "jaeles scan -U {INPUT} -o {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: false

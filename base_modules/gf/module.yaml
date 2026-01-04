@@ -1,0 +1,14 @@
+name: gf
+description: A wrapper around grep to extract patterns
+author: fleex
+
+vars:
+  PATTERN: "xss"
+
+steps:
+  - name: gf
+    command: "cat {INPUT} | gf {vars.PATTERN} > {OUTPUT}"
+
+output:
+  aggregate: concat
+  deduplicate: true

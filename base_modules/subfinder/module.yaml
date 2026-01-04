@@ -1,0 +1,11 @@
+name: subfinder
+description: Fast passive subdomain enumeration tool
+author: fleex
+
+steps:
+  - name: subfinder
+    command: "subfinder -dL {INPUT} -o {OUTPUT} -silent"
+
+output:
+  aggregate: concat
+  deduplicate: true

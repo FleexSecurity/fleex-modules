@@ -1,0 +1,12 @@
+name: trufflehog
+description: Find leaked credentials
+author: fleex
+
+steps:
+  - name: trufflehog
+    command: "cat {INPUT} | while read repo; do trufflehog git \"$repo\" --json 2>/dev/null; done > {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: false

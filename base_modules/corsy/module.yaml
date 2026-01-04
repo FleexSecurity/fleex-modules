@@ -1,0 +1,12 @@
+name: corsy
+description: CORS misconfiguration scanner
+author: fleex
+
+steps:
+  - name: corsy
+    command: "python3 /root/tools/Corsy/corsy.py -i {INPUT} -o {OUTPUT}"
+    timeout: "1h"
+
+output:
+  aggregate: concat
+  deduplicate: false

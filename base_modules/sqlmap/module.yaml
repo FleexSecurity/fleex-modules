@@ -1,0 +1,16 @@
+name: sqlmap
+description: Automatic SQL injection and database takeover tool
+author: fleex
+
+vars:
+  LEVEL: "1"
+  RISK: "1"
+
+steps:
+  - name: sqlmap
+    command: "cat {INPUT} | while read url; do sqlmap -u \"$url\" --batch --level {vars.LEVEL} --risk {vars.RISK} --output-dir=/tmp/sqlmap_out 2>/dev/null; done && find /tmp/sqlmap_out -name '*.txt' -exec cat {} \\; > {OUTPUT}"
+    timeout: "4h"
+
+output:
+  aggregate: concat
+  deduplicate: false

@@ -1,0 +1,22 @@
+name: shuffledns
+description: Wrapper around massdns for subdomain enumeration
+author: fleex
+
+vars:
+  RESOLVERS: "/root/resolvers.txt"
+  WORDLIST: "/usr/share/wordlists/dns.txt"
+
+files:
+  - source: "{vars.RESOLVERS}"
+    destination: /tmp/resolvers.txt
+  - source: "{vars.WORDLIST}"
+    destination: /tmp/wordlist.txt
+
+steps:
+  - name: shuffledns
+    command: "shuffledns -list {INPUT} -w /tmp/wordlist.txt -r /tmp/resolvers.txt -o {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: true

@@ -1,0 +1,12 @@
+name: gowitness
+description: Web screenshot utility using Chrome Headless
+author: fleex
+
+steps:
+  - name: gowitness
+    command: "gowitness file -f {INPUT} --screenshot-path /tmp/gowitness_out && ls /tmp/gowitness_out > {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: false

@@ -1,0 +1,19 @@
+name: meg
+description: Fetch many paths for many hosts without hammering hosts
+author: fleex
+
+vars:
+  PATHS: "/root/paths.txt"
+
+files:
+  - source: "{vars.PATHS}"
+    destination: /tmp/paths.txt
+
+steps:
+  - name: meg
+    command: "meg -d 100 /tmp/paths.txt {INPUT} /tmp/meg_out && find /tmp/meg_out -type f -exec cat {} \\; > {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: false

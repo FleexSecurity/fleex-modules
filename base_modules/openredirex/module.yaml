@@ -1,0 +1,12 @@
+name: openredirex
+description: Open redirect vulnerability scanner
+author: fleex
+
+steps:
+  - name: openredirex
+    command: "cat {INPUT} | openredirex > {OUTPUT}"
+    timeout: "1h"
+
+output:
+  aggregate: concat
+  deduplicate: true

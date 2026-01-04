@@ -1,0 +1,18 @@
+name: subjack
+description: Subdomain takeover vulnerability checker
+author: fleex
+
+vars:
+  FINGERPRINTS: "/root/tools/subjack/fingerprints.json"
+
+files:
+  - source: "{vars.FINGERPRINTS}"
+    destination: /tmp/fingerprints.json
+
+steps:
+  - name: subjack
+    command: "subjack -w {INPUT} -t 100 -timeout 30 -o {OUTPUT} -ssl -c /tmp/fingerprints.json"
+
+output:
+  aggregate: concat
+  deduplicate: true

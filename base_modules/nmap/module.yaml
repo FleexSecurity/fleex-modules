@@ -1,0 +1,12 @@
+name: nmap
+description: Network exploration and security auditing tool
+author: fleex
+
+steps:
+  - name: nmap
+    command: "nmap -iL {INPUT} -oN {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: false

@@ -1,0 +1,14 @@
+name: chaos-client
+description: Communicate with Chaos DNS DB API
+author: fleex
+
+vars:
+  CHAOS_KEY: ""
+
+steps:
+  - name: chaos
+    command: "cat {INPUT} | while read domain; do chaos -d \"$domain\" -key {vars.CHAOS_KEY}; done > {OUTPUT}"
+
+output:
+  aggregate: concat
+  deduplicate: true

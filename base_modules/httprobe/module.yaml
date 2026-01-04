@@ -1,0 +1,11 @@
+name: httprobe
+description: Take a list of domains and probe for working HTTP/HTTPS servers
+author: fleex
+
+steps:
+  - name: httprobe
+    command: "cat {INPUT} | httprobe > {OUTPUT}"
+
+output:
+  aggregate: concat
+  deduplicate: true

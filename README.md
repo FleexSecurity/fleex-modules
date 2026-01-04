@@ -1,64 +1,214 @@
+# Fleex Modules Repository
 
-# Fleex modules Repository
-
-This repository contains a collection of YAML files that define modules for the Fleex tool. These modules can be utilized by the `scan` function in Fleex using the following syntax: 
-
-```bash
-fleex scan --module testmodule.yaml --params VAR_NAME:var_value
-```
-
-## Module Format Example:
-
-```yaml
-# testmodule.yaml
-
-name: ffuf-module-test
-author: xm1k3
-description: ffuf module test
-
-vars:
-  INPUT: wordlist.txt
-  OUTPUT: scan-results.txt
-  URL: https://tesla.com/FUZZ
-
-commands:
-  - /root/go/bin/ffuf -w {vars.INPUT} -u {vars.URL} -o {vars.OUTPUT} -of csv
-
-```
-
-- `name`: Unique identifier for the module.
-- `author`: Name of the module creator.
-- `description`: A brief description of the module.
-
-The crucial components are:
-
-- `vars`: Defines the variables that can be used with assigned default values.
-- `commands`: Specifies the command to be executed. As shown in the example, it can take values from the variables defined in `vars`.
-
-**Note**: Each module must contain exactly one `INPUT` and one `OUTPUT` variable.
+This repository contains a collection of YAML workflow modules for the Fleex distributed scanning tool.
 
 ## Usage
 
-1 - Clone this repository.
-2- Navigate to the directory containing the module you want to use.
-3- Run the Fleex tool with the desired parameters.
-
-Example Usage:
-
 ```bash
-fleex scan --module testmodule.yaml
-  --params INPUT:new_wordlist.txt
-  --params OUTPUT:new_scan_results.txt
-  --params URL:https://example.com/FUZZ
+fleex workflow -w base_modules/subfinder/module.yaml -f fleet-name -i domains.txt -o results.txt
 ```
 
-This repository is a first version and may be expanded in the future to support multiple commands per module.
+Override variables:
+```bash
+fleex workflow -w base_modules/puredns/module.yaml -f fleet-name -i domains.txt -o results.txt \
+  --var RESOLVERS:/path/to/resolvers.txt
+```
 
-## Contributing:
+## Module Format
 
-If you would like to contribute to this repository, feel free to fork and create a pull request with your changes. Make sure to follow the same format as existing modules.
+```yaml
+name: tool-name
+description: Brief description of what the module does
+author: fleex
 
-**Note**: This is an initial version of the repository and may be subject to future updates and improvements.
+vars:                              # optional - custom variables
+  WORDLIST: "/path/to/wordlist.txt"
+  RESOLVERS: "/path/to/resolvers.txt"
+
+files:                             # optional - files to transfer before execution
+  - source: "{vars.WORDLIST}"
+    destination: /tmp/wordlist.txt
+
+setup:                             # optional - commands to run before steps
+  - "apt-get update"
+
+steps:                             # required - commands to execute
+  - name: step-name
+    command: "tool -i {INPUT} -o {OUTPUT}"
+    timeout: "2h"                  # optional
+
+output:
+  aggregate: concat                # concat | sort-unique
+  deduplicate: true                # remove duplicate lines
+```
+
+### Placeholders
+
+| Placeholder | Description |
+|-------------|-------------|
+| `{INPUT}` | Input file (automatically chunked per box) |
+| `{OUTPUT}` | Output file path |
+| `{vars.KEY}` | Custom variable value |
+
+## Available Modules
+
+### Subdomain Enumeration
+
+| Module | Description |
+|--------|-------------|
+| `subfinder` | Fast passive subdomain enumeration |
+| `amass` | In-depth attack surface mapping |
+| `assetfinder` | Find related domains and subdomains |
+| `findomain` | Fast subdomain enumeration |
+| `chaos-client` | Chaos DNS DB API client |
+| `cero` | Scrape domains from SSL certificates |
+| `github-subdomains` | Find subdomains from GitHub |
+| `aiodnsbrute` | Async DNS brute-force |
+
+### URL Discovery
+
+| Module | Description |
+|--------|-------------|
+| `gau` | Fetch URLs from AlienVault, Wayback, CommonCrawl |
+| `gauplus` | Enhanced gau with additional features |
+| `waybackurls` | Fetch URLs from Wayback Machine |
+| `github-endpoints` | Find endpoints from GitHub |
+
+### DNS Tools
+
+| Module | Description |
+|--------|-------------|
+| `dnsx` | Multi-purpose DNS toolkit |
+| `puredns` | Fast domain resolver and bruteforcer |
+| `massdns` | High-performance DNS resolver |
+| `shuffledns` | Massdns wrapper for enumeration |
+| `dnsgen` | Generate domain permutations |
+| `dnsrecon` | DNS enumeration tool |
+| `dnsvalidator` | Validate DNS resolvers |
+| `dnscewl` | Generate target-specific DNS wordlist |
+| `hakrevdns` | Reverse DNS lookup at scale |
+| `dns-resolvers` | Fetch fresh resolvers from trickest |
+| `six2dez-dns-permutations` | DNS permutation wordlist |
+
+### HTTP Probing
+
+| Module | Description |
+|--------|-------------|
+| `httpx` | Fast multi-purpose HTTP toolkit |
+| `httprobe` | Probe for working HTTP/HTTPS servers |
+| `tlsx` | Fast TLS grabber and analyzer |
+
+### Directory/File Fuzzing
+
+| Module | Description |
+|--------|-------------|
+| `ffuf` | Fast web fuzzer |
+| `feroxbuster` | Recursive content discovery |
+| `gobuster` | Directory enumeration |
+| `dirdar` | File and directory search |
+| `meg` | Fetch paths without hammering hosts |
+| `kiterunner` | API endpoint discovery |
+
+### Web Crawling
+
+| Module | Description |
+|--------|-------------|
+| `gospider` | Fast web spider |
+| `hakrawler` | Simple web crawler |
+| `linkfinder` | Discover endpoints in JS files |
+| `getjs` | Extract JavaScript files |
+| `subjs` | Fetch JS files from URLs |
+| `paramspider` | Mine parameters from Web Archives |
+| `arjun` | HTTP parameter discovery |
+| `fff` | Fast flexible fuzzer |
+| `concurl` | Concurrent curl requests |
+| `gorgo` | Fast web crawler |
+
+### Vulnerability Scanning
+
+| Module | Description |
+|--------|-------------|
+| `nuclei` | Template-based vulnerability scanner |
+| `jaeles` | Web application scanner |
+| `sqlmap` | SQL injection scanner |
+| `dalfox` | XSS scanner |
+| `commix` | Command injection tool |
+| `gxss` | Check XSS payload acceptance |
+| `kxss` | Check reflected parameters |
+| `crlfuzz` | CRLF vulnerability scanner |
+| `corsy` | CORS misconfiguration scanner |
+| `openredirex` | Open redirect scanner |
+| `subjack` | Subdomain takeover checker |
+| `s3scanner` | AWS S3 bucket scanner |
+| `wpscan` | WordPress security scanner |
+| `testssl` | TLS/SSL testing |
+| `trufflehog` | Credential leak finder |
+| `erlpopper` | Erlang Port Mapper scanner |
+
+### Port Scanning
+
+| Module | Description |
+|--------|-------------|
+| `nmap` | Network exploration tool |
+| `masscan` | Fast port scanner |
+| `naabu` | Fast port scanner (Go) |
+| `rustscan` | Modern fast port scanner |
+| `unimap` | Scan hosts only once |
+
+### Screenshots
+
+| Module | Description |
+|--------|-------------|
+| `aquatone` | Visual inspection of websites |
+| `gowitness` | Web screenshots with Chrome |
+| `webscreenshot` | Take website screenshots |
+| `scrying` | Web screenshot tool |
+
+### Brute Force
+
+| Module | Description |
+|--------|-------------|
+| `thc-hydra` | Network logon cracker |
+| `medusa` | Parallel login brute-forcer |
+| `crackmapexec` | Network pentesting swiss knife |
+
+### Utilities
+
+| Module | Description |
+|--------|-------------|
+| `anew` | Append unique lines to file |
+| `gf` | Grep wrapper for patterns |
+| `qsreplace` | Replace query string values |
+| `anti-burl` | Check if URLs are alive |
+| `exclude-cdn` | Exclude CDN IPs |
+| `ipcdn` | Check CDN provider IPs |
+| `leaky-paths` | Check common leaky paths |
+| `interlace` | Run commands in parallel |
+| `wafw00f` | WAF detection |
+
+## Directory Structure
+
+```
+fleex-modules/
+├── README.md
+├── LICENSE
+└── base_modules/
+    ├── subfinder/
+    │   └── module.yaml
+    ├── amass/
+    │   └── module.yaml
+    ├── httpx/
+    │   └── module.yaml
+    └── ...
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a new module in `base_modules/your-tool/module.yaml`
+3. Follow the module format above
+4. Submit a pull request
 
 ## License
+
 Fleex modules is distributed under Apache-2.0 License

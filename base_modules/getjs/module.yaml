@@ -1,0 +1,11 @@
+name: getjs
+description: Extract JavaScript files from a list of URLs
+author: fleex
+
+steps:
+  - name: getjs
+    command: "cat {INPUT} | getJS --complete > {OUTPUT}"
+
+output:
+  aggregate: concat
+  deduplicate: true

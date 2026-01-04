@@ -1,0 +1,12 @@
+name: nuclei
+description: Fast vulnerability scanner based on templates
+author: fleex
+
+steps:
+  - name: nuclei
+    command: "nuclei -l {INPUT} -o {OUTPUT} -silent"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: true

@@ -1,0 +1,21 @@
+name: thc-hydra
+description: Network logon cracker
+author: fleex
+
+vars:
+  SERVICE: "ssh"
+  USER: "root"
+  PASSLIST: "/usr/share/wordlists/rockyou.txt"
+
+files:
+  - source: "{vars.PASSLIST}"
+    destination: /tmp/passlist.txt
+
+steps:
+  - name: hydra
+    command: "cat {INPUT} | while read host; do hydra -l {vars.USER} -P /tmp/passlist.txt \"$host\" {vars.SERVICE} -o /tmp/hydra_$(echo \"$host\" | md5sum | cut -d' ' -f1).txt 2>/dev/null; done && cat /tmp/hydra_*.txt > {OUTPUT}"
+    timeout: "4h"
+
+output:
+  aggregate: concat
+  deduplicate: false

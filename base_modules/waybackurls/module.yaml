@@ -1,0 +1,12 @@
+name: waybackurls
+description: Fetch URLs from Wayback Machine for a domain
+author: fleex
+
+steps:
+  - name: waybackurls
+    command: "cat {INPUT} | waybackurls > {OUTPUT}"
+    timeout: "1h"
+
+output:
+  aggregate: concat
+  deduplicate: true

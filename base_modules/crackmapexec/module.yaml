@@ -1,0 +1,17 @@
+name: crackmapexec
+description: Swiss army knife for pentesting networks
+author: fleex
+
+vars:
+  PROTOCOL: "smb"
+  USER: "administrator"
+  PASSWORD: ""
+
+steps:
+  - name: crackmapexec
+    command: "crackmapexec {vars.PROTOCOL} {INPUT} -u {vars.USER} -p {vars.PASSWORD} > {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: false

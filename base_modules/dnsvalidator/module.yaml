@@ -1,0 +1,12 @@
+name: dnsvalidator
+description: Validate DNS resolvers for performance and reliability
+author: fleex
+
+steps:
+  - name: dnsvalidator
+    command: "dnsvalidator -tL {INPUT} -threads 100 -o {OUTPUT}"
+    timeout: "30m"
+
+output:
+  aggregate: concat
+  deduplicate: true

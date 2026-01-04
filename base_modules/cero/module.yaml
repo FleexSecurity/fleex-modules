@@ -1,0 +1,11 @@
+name: cero
+description: Scrape domain names from SSL certificates
+author: fleex
+
+steps:
+  - name: cero
+    command: "cat {INPUT} | cero > {OUTPUT}"
+
+output:
+  aggregate: concat
+  deduplicate: true

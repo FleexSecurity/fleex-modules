@@ -1,0 +1,11 @@
+name: anew
+description: Append lines from stdin to a file if they don't already exist
+author: fleex
+
+steps:
+  - name: anew
+    command: "cat {INPUT} | anew {OUTPUT}"
+
+output:
+  aggregate: concat
+  deduplicate: true

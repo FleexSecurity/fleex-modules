@@ -1,0 +1,15 @@
+name: github-subdomains
+description: Find subdomains from GitHub source code
+author: fleex
+
+vars:
+  GITHUB_TOKEN: ""
+
+steps:
+  - name: github-subdomains
+    command: "cat {INPUT} | while read domain; do github-subdomains -d \"$domain\" -t {vars.GITHUB_TOKEN}; done > {OUTPUT}"
+    timeout: "1h"
+
+output:
+  aggregate: concat
+  deduplicate: true

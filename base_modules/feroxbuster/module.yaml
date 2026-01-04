@@ -1,0 +1,19 @@
+name: feroxbuster
+description: Fast, simple, recursive content discovery tool
+author: fleex
+
+vars:
+  WORDLIST: "/usr/share/wordlists/dirb/common.txt"
+
+files:
+  - source: "{vars.WORDLIST}"
+    destination: /tmp/wordlist.txt
+
+steps:
+  - name: feroxbuster
+    command: "feroxbuster --stdin -w /tmp/wordlist.txt -o {OUTPUT} < {INPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: true

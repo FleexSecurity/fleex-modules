@@ -1,0 +1,19 @@
+name: leaky-paths
+description: Check for common leaky paths
+author: fleex
+
+vars:
+  PATHS: "/root/leaky-paths.txt"
+
+files:
+  - source: "{vars.PATHS}"
+    destination: /tmp/leaky-paths.txt
+
+steps:
+  - name: leaky-paths
+    command: "cat {INPUT} | while read url; do while read path; do curl -s -o /dev/null -w \"%{http_code} $url$path\\n\" \"$url$path\"; done < /tmp/leaky-paths.txt; done | grep -E '^200' > {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: true

@@ -1,0 +1,11 @@
+name: dnsx
+description: Fast and multi-purpose DNS toolkit
+author: fleex
+
+steps:
+  - name: dnsx
+    command: "dnsx -l {INPUT} -o {OUTPUT} -silent"
+
+output:
+  aggregate: concat
+  deduplicate: true

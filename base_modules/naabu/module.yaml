@@ -1,0 +1,12 @@
+name: naabu
+description: Fast port scanner written in Go
+author: fleex
+
+steps:
+  - name: naabu
+    command: "naabu -l {INPUT} -o {OUTPUT} -silent"
+    timeout: "1h"
+
+output:
+  aggregate: concat
+  deduplicate: true

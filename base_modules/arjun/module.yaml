@@ -1,0 +1,12 @@
+name: arjun
+description: HTTP parameter discovery suite
+author: fleex
+
+steps:
+  - name: arjun
+    command: "arjun -i {INPUT} -oJ {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: false

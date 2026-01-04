@@ -1,0 +1,12 @@
+name: webscreenshot
+description: Take screenshots of websites
+author: fleex
+
+steps:
+  - name: webscreenshot
+    command: "python3 /root/tools/webscreenshot/webscreenshot.py -i {INPUT} -o /tmp/webscreenshot_out && ls /tmp/webscreenshot_out > {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: false

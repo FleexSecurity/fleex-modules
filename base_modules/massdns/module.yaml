@@ -1,0 +1,19 @@
+name: massdns
+description: High-performance DNS stub resolver
+author: fleex
+
+vars:
+  RESOLVERS: "/root/resolvers.txt"
+
+files:
+  - source: "{vars.RESOLVERS}"
+    destination: /tmp/resolvers.txt
+
+steps:
+  - name: massdns
+    command: "massdns -r /tmp/resolvers.txt -t A -o S {INPUT} > {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: true

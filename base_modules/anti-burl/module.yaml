@@ -1,0 +1,11 @@
+name: anti-burl
+description: Check if URLs are alive
+author: fleex
+
+steps:
+  - name: anti-burl
+    command: "cat {INPUT} | anti-burl > {OUTPUT}"
+
+output:
+  aggregate: concat
+  deduplicate: true

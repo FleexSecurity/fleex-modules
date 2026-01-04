@@ -1,0 +1,16 @@
+name: masscan
+description: Fast port scanner
+author: fleex
+
+vars:
+  PORTS: "80,443,8080,8443"
+  RATE: "10000"
+
+steps:
+  - name: masscan
+    command: "masscan -iL {INPUT} -p{vars.PORTS} --rate {vars.RATE} -oL {OUTPUT}"
+    timeout: "1h"
+
+output:
+  aggregate: concat
+  deduplicate: true

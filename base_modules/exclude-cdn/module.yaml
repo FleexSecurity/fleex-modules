@@ -1,0 +1,11 @@
+name: exclude-cdn
+description: Exclude CDN IPs from list
+author: fleex
+
+steps:
+  - name: exclude-cdn
+    command: "cat {INPUT} | exclude-cdn > {OUTPUT}"
+
+output:
+  aggregate: concat
+  deduplicate: true

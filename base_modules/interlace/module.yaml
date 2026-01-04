@@ -1,0 +1,16 @@
+name: interlace
+description: Run commands in parallel with targets from file
+author: fleex
+
+vars:
+  COMMAND: "echo _target_"
+  THREADS: "10"
+
+steps:
+  - name: interlace
+    command: "interlace -tL {INPUT} -threads {vars.THREADS} -c \"{vars.COMMAND}\" -o {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: false

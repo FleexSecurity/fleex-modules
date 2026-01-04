@@ -1,0 +1,11 @@
+name: dnscewl
+description: Generate DNS wordlist from target-specific words
+author: fleex
+
+steps:
+  - name: dnscewl
+    command: "dnscewl -tL {INPUT} > {OUTPUT}"
+
+output:
+  aggregate: concat
+  deduplicate: true

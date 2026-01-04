@@ -1,0 +1,15 @@
+name: rustscan
+description: Modern fast port scanner
+author: fleex
+
+vars:
+  ULIMIT: "5000"
+
+steps:
+  - name: rustscan
+    command: "cat {INPUT} | while read ip; do rustscan -a \"$ip\" --ulimit {vars.ULIMIT} 2>/dev/null; done > {OUTPUT}"
+    timeout: "1h"
+
+output:
+  aggregate: concat
+  deduplicate: true

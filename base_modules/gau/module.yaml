@@ -1,0 +1,12 @@
+name: gau
+description: Fetch known URLs from AlienVault OTX, Wayback Machine, Common Crawl
+author: fleex
+
+steps:
+  - name: gau
+    command: "cat {INPUT} | gau --subs > {OUTPUT}"
+    timeout: "1h"
+
+output:
+  aggregate: concat
+  deduplicate: true

@@ -1,0 +1,11 @@
+name: gxss
+description: Check if a URL accepts XSS payloads
+author: fleex
+
+steps:
+  - name: gxss
+    command: "cat {INPUT} | Gxss > {OUTPUT}"
+
+output:
+  aggregate: concat
+  deduplicate: true

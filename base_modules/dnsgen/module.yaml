@@ -1,0 +1,11 @@
+name: dnsgen
+description: Generate domain name permutations
+author: fleex
+
+steps:
+  - name: dnsgen
+    command: "cat {INPUT} | dnsgen - > {OUTPUT}"
+
+output:
+  aggregate: concat
+  deduplicate: true

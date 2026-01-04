@@ -1,0 +1,19 @@
+name: ffuf
+description: Fast web fuzzer for directory and file discovery
+author: fleex
+
+vars:
+  WORDLIST: "/usr/share/wordlists/dirb/common.txt"
+
+files:
+  - source: "{vars.WORDLIST}"
+    destination: /tmp/wordlist.txt
+
+steps:
+  - name: ffuf
+    command: "cat {INPUT} | while read url; do ffuf -u \"$url/FUZZ\" -w /tmp/wordlist.txt -mc 200,301,302,403 -of csv -o /tmp/ffuf_$(echo \"$url\" | md5sum | cut -d' ' -f1).csv 2>/dev/null; done && cat /tmp/ffuf_*.csv > {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: true

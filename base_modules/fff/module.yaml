@@ -1,0 +1,11 @@
+name: fff
+description: Fast flexible fuzzer for web
+author: fleex
+
+steps:
+  - name: fff
+    command: "cat {INPUT} | fff > {OUTPUT}"
+
+output:
+  aggregate: concat
+  deduplicate: true

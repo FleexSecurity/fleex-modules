@@ -1,0 +1,11 @@
+name: tlsx
+description: Fast TLS grabber and analyzer
+author: fleex
+
+steps:
+  - name: tlsx
+    command: "tlsx -l {INPUT} -o {OUTPUT} -silent"
+
+output:
+  aggregate: concat
+  deduplicate: true

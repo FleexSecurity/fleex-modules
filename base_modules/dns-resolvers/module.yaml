@@ -1,0 +1,11 @@
+name: dns-resolvers
+description: Fetch fresh DNS resolvers from trickest
+author: fleex
+
+steps:
+  - name: fetch-resolvers
+    command: "curl -s https://raw.githubusercontent.com/trickest/resolvers/main/resolvers.txt > {OUTPUT}"
+
+output:
+  aggregate: concat
+  deduplicate: true

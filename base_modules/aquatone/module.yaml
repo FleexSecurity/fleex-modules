@@ -1,0 +1,12 @@
+name: aquatone
+description: Visual inspection of websites across large number of hosts
+author: fleex
+
+steps:
+  - name: aquatone
+    command: "cat {INPUT} | aquatone -out /tmp/aquatone_out && cp /tmp/aquatone_out/aquatone_report.html {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: false

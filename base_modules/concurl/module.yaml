@@ -1,0 +1,11 @@
+name: concurl
+description: Concurrent curl requests from stdin
+author: fleex
+
+steps:
+  - name: concurl
+    command: "cat {INPUT} | concurl > {OUTPUT}"
+
+output:
+  aggregate: concat
+  deduplicate: true

@@ -1,0 +1,19 @@
+name: gobuster
+description: Directory and file enumeration tool
+author: fleex
+
+vars:
+  WORDLIST: "/usr/share/wordlists/dirb/common.txt"
+
+files:
+  - source: "{vars.WORDLIST}"
+    destination: /tmp/wordlist.txt
+
+steps:
+  - name: gobuster
+    command: "cat {INPUT} | while read url; do gobuster dir -u \"$url\" -w /tmp/wordlist.txt -o /tmp/gobuster_$(echo \"$url\" | md5sum | cut -d' ' -f1).txt 2>/dev/null; done && cat /tmp/gobuster_*.txt > {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: true

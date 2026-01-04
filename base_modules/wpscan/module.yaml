@@ -1,0 +1,15 @@
+name: wpscan
+description: WordPress security scanner
+author: fleex
+
+vars:
+  API_TOKEN: ""
+
+steps:
+  - name: wpscan
+    command: "cat {INPUT} | while read url; do wpscan --url \"$url\" --api-token {vars.API_TOKEN} --format json --output /tmp/wpscan_$(echo \"$url\" | md5sum | cut -d' ' -f1).json 2>/dev/null; done && cat /tmp/wpscan_*.json > {OUTPUT}"
+    timeout: "2h"
+
+output:
+  aggregate: concat
+  deduplicate: false

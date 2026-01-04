@@ -1,0 +1,12 @@
+name: unimap
+description: Scan large lists of hosts only once
+author: fleex
+
+steps:
+  - name: unimap
+    command: "unimap --url-file {INPUT} -o {OUTPUT}"
+    timeout: "1h"
+
+output:
+  aggregate: concat
+  deduplicate: true

@@ -1,0 +1,12 @@
+name: hakrawler
+description: Simple web crawler for gathering URLs and JavaScript file locations
+author: fleex
+
+steps:
+  - name: hakrawler
+    command: "cat {INPUT} | hakrawler > {OUTPUT}"
+    timeout: "1h"
+
+output:
+  aggregate: concat
+  deduplicate: true

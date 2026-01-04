@@ -1,0 +1,12 @@
+name: linkfinder
+description: Discover endpoints in JavaScript files
+author: fleex
+
+steps:
+  - name: linkfinder
+    command: "cat {INPUT} | while read url; do python3 /root/tools/LinkFinder/linkfinder.py -i \"$url\" -o cli 2>/dev/null; done > {OUTPUT}"
+    timeout: "1h"
+
+output:
+  aggregate: concat
+  deduplicate: true

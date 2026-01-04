@@ -209,6 +209,8 @@ fleex-modules/
 3. Follow the module format above
 4. Submit a pull request
 
+> **Disclaimer**: These modules are provided for security research and educational purposes only, to help the cybersecurity community. The author assumes no responsibility for any misuse or damage caused by the improper use of these modules. Always ensure you have explicit authorization before testing any systems you do not own.
+
 ## License
 
 Fleex modules is distributed under Apache-2.0 License

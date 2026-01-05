@@ -5,12 +5,12 @@ This repository contains a collection of YAML workflow modules for the Fleex dis
 ## Usage
 
 ```bash
-fleex workflow -w base_modules/subfinder/module.yaml -f fleet-name -i domains.txt -o results.txt
+fleex scan -w module-name -n fleet-name -f fleet-name -i domains.txt -o results.txt
 ```
 
 Override variables:
 ```bash
-fleex workflow -w base_modules/puredns/module.yaml -f fleet-name -i domains.txt -o results.txt \
+fleex scan -w module-name -n fleet-name -i domains.txt -o results.txt \
   --var RESOLVERS:/path/to/resolvers.txt
 ```
 
